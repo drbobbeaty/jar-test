@@ -1,0 +1,8 @@
+*.swp
+*.swo
+dump.rdb
+*~
+\#*
+.#*
+.idea/
+jar-test.jar

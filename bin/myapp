@@ -1,0 +1,32 @@
+#!/usr/bin/env jruby
+
+puts "Howdy!"
+
+name = File.dirname(__FILE__)+'/../config'
+puts "got: #{name}"
+
+files = Dir.glob(name + "/*")
+puts "config files: #{files}"
+
+contents = ''
+files.each do |src|
+  File.open(src) do |file|
+    contents = file.read
+  end if File.exists?(src)
+end
+puts "contents: #{contents}"
+puts "===================================="
+
+parent = File.dirname(File.dirname(__FILE__))
+puts "uniform way: #{parent}"
+
+files = Dir.glob(parent + "/config/*")
+puts "config files: #{files}"
+
+contents = ''
+files.each do |src|
+  File.open(src) do |file|
+    contents = file.read
+  end if File.exists?(src)
+end
+puts "contents: #{contents}"
