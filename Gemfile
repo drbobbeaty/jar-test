@@ -7,4 +7,4 @@ gem 'configulations'
 
 gem 'rspec'
 gem 'warbler'
-gem 'jruby-jars', '1.7.0.rc1'
+gem 'jruby-jars'
