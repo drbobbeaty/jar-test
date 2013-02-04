@@ -30,3 +30,19 @@ files.each do |src|
   end if File.exists?(src)
 end
 puts "contents: #{contents}"
+puts "===================================="
+
+files = []
+parts = __FILE__.split(/!\//)
+if parts.size > 1
+  base = parts[0] + '!/' + parts[1].split(/\//)[0]
+  puts "this file: #{__FILE__}"
+  puts "  ...base: #{base}"
+  files << File.join(base, "config", "admin")
+end
+files << File.join("config", "admin")
+#files << File.join("./config", "admin")
+files.detect do |file|
+  puts "#{file} check... #{File.exists? file}"
+  puts File.expand_path(file) if File.exists? file
+end
