@@ -1,4 +1,9 @@
 #!/usr/bin/env jruby
+require 'net/http'
+require 'newrelic_rpm'
+require 'uri'
+
+NewRelic::Agent.manual_start :app_name => 'My Jar-Test (Dev)', :agent_enabled => true
 
 puts "Howdy!"
 
@@ -14,7 +19,7 @@ files.each do |src|
     contents = file.read
   end if File.exists?(src)
 end
-puts "contents: #{contents}"
+# puts "contents: #{contents}"
 puts "===================================="
 
 parent = File.dirname(File.dirname(__FILE__))
@@ -29,4 +34,17 @@ files.each do |src|
     contents = file.read
   end if File.exists?(src)
 end
-puts "contents: #{contents}"
+# puts "contents: #{contents}"
+puts "===================================="
+
+sites = [URI.parse("http://google.com/"), URI.parse("http://google.com/finance/"), URI.parse("http://apple.com/"), URI.parse("http://github.com/")]
+
+10.times do
+	100.times do
+		sites.each do |uri|
+			response = Net::HTTP.get_response(uri)
+	#		Net::HTTP.get_print(uri)
+		end
+	end
+	puts "100 down..."
+end
