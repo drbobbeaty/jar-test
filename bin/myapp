@@ -34,17 +34,20 @@ files.each do |src|
     contents = file.read
   end if File.exists?(src)
 end
-# puts "contents: #{contents}"
+puts "contents: #{contents}"
 puts "===================================="
 
-sites = [URI.parse("http://google.com/"), URI.parse("http://google.com/finance/"), URI.parse("http://apple.com/"), URI.parse("http://github.com/")]
-
-10.times do
-	100.times do
-		sites.each do |uri|
-			response = Net::HTTP.get_response(uri)
-	#		Net::HTTP.get_print(uri)
-		end
-	end
-	puts "100 down..."
+files = []
+parts = __FILE__.split(/!\//)
+if parts.size > 1
+  base = parts[0] + '!/' + parts[1].split(/\//)[0]
+  puts "this file: #{__FILE__}"
+  puts "  ...base: #{base}"
+  files << File.join(base, "config", "admin")
+end
+files << File.join("config", "admin")
+#files << File.join("./config", "admin")
+files.detect do |file|
+  puts "#{file} check... #{File.exists? file}"
+  puts File.expand_path(file) if File.exists? file
 end
